@@ -38,7 +38,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL:
-        "https://nodejs-authentication-system-l2pu.onrender.com/auth/google/callback",
+        "http://localhost:3000/auth/google/callback",
       scope: ["profile", "email"],
     },
     function (accessToken, refreshToken, profile, callback) {
@@ -64,8 +64,11 @@ app.set("views", path.join(path.resolve(), "views")); // Define template directo
 connectUsingMongoose();
 
 //ROUTES
+// app.get("/", (req, res) => {
+//   res.send("Hey Ninja ! Go to /user/signin for the login page.");
+// });
 app.get("/", (req, res) => {
-  res.send("Hey Ninja ! Go to /user/signin for the login page.");
+  res.render("signin", { message: "" });
 });
 app.use("/user", router);
 app.use("/auth", authrouter);
